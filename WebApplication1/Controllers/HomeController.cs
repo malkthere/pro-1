@@ -1,5 +1,9 @@
 ﻿using System.Diagnostics;
+using System.Net.Mime;
+using System.Xml;
+using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
 using WebApplication1.Models;
 
 namespace WebApplication1.Controllers;
@@ -22,7 +26,17 @@ public class HomeController : Controller
     {
         return View();
     }
+   public IActionResult OnPost([FromForm]string name)
+       {
+           TempData["Name"] = name;
+           return RedirectToPage("Index");
+       }
+    public IActionResult TryPage()
+    {
+        return View();
+    }
 
+    
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
     {
